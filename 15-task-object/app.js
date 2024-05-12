@@ -8,7 +8,7 @@ const toDoList = {
             priority: 2
         }
     ],
-    addTask: function(title, priority) {
+    addTask(title, priority) {
         if (title && priority) {
             const id = this.tasks.slice(-1)[0].id + 1;
     
@@ -19,25 +19,19 @@ const toDoList = {
             });
         }
     },
-    deleteTaskById: function(taskId) {
+    deleteTaskById(taskId) {
         this.tasks = this.tasks.filter(task => task.id !== taskId);
     },
-    updateNameOrPriority: function(taskId, newParameter) {
-        if (taskId && newParameter) {
+    updateParams(taskId, typeOfNewParameter, newParameter) {
+        if (taskId && typeOfNewParameter && newParameter) {
             const task = this.tasks.find(task => task.id === taskId);
             
-            if (task && typeof(newParameter) === 'string') {
-                task.title = newParameter;
-            } else if (task && typeof(newParameter) === 'number') {
-                task.priority = newParameter;
-            }
+            task[typeOfNewParameter] = newParameter;
         }
     },
-    sortTasks: function(sortParameter, increasing) {
-        if (sortParameter.toLowerCase() === 'id') {
-            this.tasks.sort((a, b) => a.id > b.id ? increasing : !increasing);
-        } else if (sortParameter.toLowerCase() === 'priority') {
-            this.tasks.sort((a, b) => a.priority > b.priority ? increasing : !increasing);
+    sortTasks(sortParameter, increasing) {
+        if (sortParameter in this.tasks[0]) {
+            this.tasks.sort((a, b) => a[sortParameter] > b[sortParameter] ? increasing : !increasing);
         }
     }
 }
@@ -54,10 +48,11 @@ toDoList.deleteTaskById(15);
 toDoList.deleteTaskById('');
 toDoList.deleteTaskById();
 
-toDoList.updateNameOrPriority(3, 'Выпить 2 литра воды');
-toDoList.updateNameOrPriority(4, '');
-toDoList.updateNameOrPriority(3, 1);
-toDoList.updateNameOrPriority('', 1);
+toDoList.updateParams(3, 'title', 'Выпить 2 литра воды');
+toDoList.updateParams(4, 'title', '');
+toDoList.updateParams(3, 'priority', 1);
+toDoList.updateParams('', 'priority', 1);
+toDoList.updateParams(2, '', 100);
 
 toDoList.sortTasks('id', true);
 toDoList.sortTasks('id', false);
