@@ -10,8 +10,13 @@ const toDoList = {
     ],
     addTask(title, priority) {
         if (title && priority) {
-            const id = this.tasks.slice(-1)[0].id + 1;
-    
+            let id = 1;
+
+            if (this.tasks.length) {
+                this.sortTasks('id', true);
+                id = this.tasks.slice(-1)[0].id + 1;
+            }
+
             this.tasks.push({
                 title,
                 id,
@@ -61,5 +66,13 @@ toDoList.sortTasks('priority', true);
 toDoList.sortTasks('priority', 123);
 toDoList.sortTasks('priority', 'test');
 toDoList.sortTasks('prioritet', 'test');
+
+toDoList.deleteTaskById(3);
+toDoList.deleteTaskById(5);
+toDoList.deleteTaskById(2);
+toDoList.deleteTaskById(4);
+
+toDoList.addTask('Выпить 4 литра воды', 3);
+toDoList.addTask('Выпить 4 литра воды', 3);
 
 console.log(toDoList);
