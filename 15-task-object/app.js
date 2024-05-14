@@ -10,16 +10,15 @@ const toDoList = {
     ],
     addTask(title, priority) {
         if (title && priority) {
-            let id = 1;
+            let id = 0;
 
             if (this.tasks.length) {
-                this.sortTasks('id', true);
-                id = this.tasks.slice(-1)[0].id + 1;
+                id = this.tasks.reduce((biggestId, task) => biggestId > task.id ? biggestId : task.id, 0);
             }
 
             this.tasks.push({
                 title,
-                id,
+                id: ++id,
                 priority
             });
         }
