@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+    <header class="header">
+        <h1>Calculator</h1>
+    </header>
+    <div class="calculator-wrapper">
+        <form action="#" method="get">
+            <div>
+                <input class="input input1"/>
+            </div>
+            <div>
+                <input class="input input2" />
+            </div>
+            <div class="math-buttons">
+                <button class="button button__math" onclick="calculateSum()">+</button>
+                <button class="button button__math" onclick="calculateDifference()">-</button>
+                <button class="button button__math" onclick="calculateMultiplication()">*</button>
+                <button class="button button__math" onclick="calculateDivision()">/</button>
+            </div>
+            <div class="panel">
+                Result:
+            </div>
+            <div class="calculations">0</div>
+        </form>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>
